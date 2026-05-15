@@ -1,6 +1,7 @@
 from faker import Faker
 import random
-from db_connexio_ok import connectar_bd 
+from db_connexio
+import get_connection 
 
 # Inicialitzem Faker per a Català/Castellà i per a Rus (caràcters cirílics)
 fake_local = Faker('ca_ES')
