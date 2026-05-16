@@ -35,3 +35,12 @@ def get_connection():
         except Exception as e:
             print(f"Error crític: Els dos servidors estan caiguts. Detalls: {e}")
             return None
+        
+if __name__ == "__main__":
+    conn = get_connection()
+    if conn:
+        print("Connexió establerta. Procedint amb operacions a la base de dades...")
+        # Aquí podríem afegir codi per interactuar amb la base de dades
+        conn.close()
+    else:
+        print("No s'ha pogut establir connexió amb cap servidor.")
