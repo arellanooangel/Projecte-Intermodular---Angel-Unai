@@ -4,7 +4,7 @@ def get_connection():
     """Estableix la connexió amb la base de dades PostgreSQL."""
     try:
         connection = psycopg2.connect(
-            host="192.168.1.10",
+            host="node1",
             database="hospital",
             user="ua-admin", 
             password="admin123",
