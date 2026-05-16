@@ -8,7 +8,7 @@ def get_connection():
     try:
         print("Intentant connectar a node1...")
         connection = psycopg2.connect(
-            host="node1",
+            host="192.168.56.10",
             database="hospital",
             user="ua-admin", 
             password="admin123",
@@ -23,7 +23,7 @@ def get_connection():
         # Si el principal falla
         try:
             connection = psycopg2.connect(
-                host="node2", 
+                host="192.168.56.20", 
                 database="hospital",
                 user="ua-admin", 
                 password="admin123",
