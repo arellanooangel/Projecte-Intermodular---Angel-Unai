@@ -1,0 +1,127 @@
+SET search_path TO hospital;
+-- ============================================
+-- ELIMINAR ROLS PER FER PROVES
+-- ============================================
+REVOKE ALL ON ALL TABLES IN SCHEMA hospital FROM PUBLIC;
+REVOKE ALL ON ALL SEQUENCES IN SCHEMA hospital FROM PUBLIC;
+DROP ROLE IF EXISTS rol_admin;
+DROP ROLE IF EXISTS rol_metge;
+DROP ROLE IF EXISTS rol_infermer;
+DROP ROLE IF EXISTS rol_vari;
+DROP ROLE IF EXISTS rol_consulta;
+
+-- ============================================
+-- CREAR ROLS
+-- ============================================
+CREATE ROLE rol_admin;
+CREATE ROLE rol_metge;
+CREATE ROLE rol_infermer;
+CREATE ROLE rol_vari;
+CREATE ROLE rol_consulta;
+
+GRANT USAGE ON SCHEMA hospital TO rol_admin;
+GRANT USAGE ON SCHEMA hospital TO rol_metge;
+GRANT USAGE ON SCHEMA hospital TO rol_infermer;
+GRANT USAGE ON SCHEMA hospital TO rol_vari;
+GRANT USAGE ON SCHEMA hospital TO rol_consulta;
+
+-- ============================================
+-- PERMISOS ROL_ADMIN
+-- ============================================
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA hospital TO rol_admin;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA hospital TO rol_admin;
+
+
+-- ============================================
+-- PERMISOS ROL_METGE
+-- ============================================
+GRANT SELECT ON especialitat TO rol_metge;
+GRANT SELECT ON medicament TO rol_metge;
+GRANT SELECT ON aparell TO rol_metge;
+GRANT SELECT ON planta TO rol_metge;
+GRANT SELECT ON personal TO rol_metge;
+GRANT SELECT ON metge TO rol_metge;
+GRANT SELECT ON infermer TO rol_metge;
+GRANT SELECT ON inferm_planta TO rol_metge;
+GRANT SELECT ON inferm_metge TO rol_metge;
+GRANT SELECT ON habitacio TO rol_metge;
+GRANT SELECT ON quirofan TO rol_metge;
+GRANT SELECT ON quirofan_aparell TO rol_metge;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON pacient TO rol_metge;
+GRANT SELECT, INSERT, UPDATE, DELETE ON visita TO rol_metge;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ingres TO rol_metge;
+GRANT SELECT, INSERT, UPDATE, DELETE ON operacio TO rol_metge;
+GRANT SELECT, INSERT, UPDATE, DELETE ON visita_medicament TO rol_metge;
+GRANT SELECT, INSERT, UPDATE, DELETE ON operacio_infermer TO rol_metge;
+
+GRANT USAGE ON SEQUENCE visita_id_visita_seq TO rol_metge;
+GRANT USAGE ON SEQUENCE ingres_id_ingres_seq TO rol_metge;
+GRANT USAGE ON SEQUENCE operacio_id_operacio_seq TO rol_metge;
+
+
+-- ============================================
+-- PERMISOS ROL_INFERMER
+-- ============================================
+GRANT SELECT ON especialitat TO rol_infermer;
+GRANT SELECT ON medicament TO rol_infermer;
+GRANT SELECT ON aparell TO rol_infermer;
+GRANT SELECT ON planta TO rol_infermer;
+GRANT SELECT ON pacient TO rol_infermer;
+GRANT SELECT ON personal TO rol_infermer;
+GRANT SELECT ON metge TO rol_infermer;
+GRANT SELECT ON infermer TO rol_infermer;
+GRANT SELECT ON inferm_planta TO rol_infermer;
+GRANT SELECT ON inferm_metge TO rol_infermer;
+GRANT SELECT ON habitacio TO rol_infermer;
+GRANT SELECT ON quirofan TO rol_infermer;
+GRANT SELECT ON quirofan_aparell TO rol_infermer;
+GRANT SELECT ON visita TO rol_infermer;
+GRANT SELECT ON operacio TO rol_infermer;
+GRANT SELECT ON visita_medicament TO rol_infermer;
+GRANT SELECT ON operacio_infermer TO rol_infermer;
+
+GRANT SELECT, INSERT, UPDATE ON ingres TO rol_infermer;
+
+GRANT USAGE ON SEQUENCE ingres_id_ingres_seq TO rol_infermer;
+
+
+-- ============================================
+-- PERMISOS ROL_VARI
+-- ============================================
+GRANT SELECT ON aparell TO rol_vari;
+GRANT SELECT ON planta TO rol_vari;
+GRANT SELECT ON vari TO rol_vari;
+GRANT SELECT ON habitacio TO rol_vari;
+GRANT SELECT ON quirofan TO rol_vari;
+GRANT SELECT ON quirofan_aparell TO rol_vari;
+GRANT SELECT ON personal TO rol_vari;
+GRANT SELECT ON ingres TO rol_vari;
+
+
+-- ============================================
+-- PERMISOS ROL_CONSULTA
+-- ============================================
+GRANT SELECT ON especialitat TO rol_consulta;
+GRANT SELECT ON medicament TO rol_consulta;
+GRANT SELECT ON aparell TO rol_consulta;
+GRANT SELECT ON planta TO rol_consulta;
+GRANT SELECT ON pacient TO rol_consulta;
+GRANT SELECT ON personal TO rol_consulta;
+GRANT SELECT ON metge TO rol_consulta;
+GRANT SELECT ON infermer TO rol_consulta;
+GRANT SELECT ON inferm_planta TO rol_consulta;
+GRANT SELECT ON inferm_metge TO rol_consulta;
+GRANT SELECT ON habitacio TO rol_consulta;
+GRANT SELECT ON vari TO rol_consulta;
+GRANT SELECT ON quirofan TO rol_consulta;
+GRANT SELECT ON quirofan_aparell TO rol_consulta;
+GRANT SELECT ON visita TO rol_consulta;
+GRANT SELECT ON ingres TO rol_consulta;
+GRANT SELECT ON operacio TO rol_consulta;
+GRANT SELECT ON visita_medicament TO rol_consulta;
+GRANT SELECT ON operacio_infermer TO rol_consulta;
+
+-- Usuari admin creat
+CREATE ROLE "ua-admin" WITH LOGIN PASSWORD 'admin123';
+GRANT rol_admin TO "ua-admin";
